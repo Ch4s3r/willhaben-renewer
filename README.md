@@ -7,7 +7,7 @@ Requires ssh access (e.g. you have a deploy key or your GitHub key loaded in you
 ```bash
 export WILLHABEN_USERNAME="your@login"
 export WILLHABEN_PASSWORD="secret"
-nix run git+ssh://git@github.com/Ch4s3r/willhaben-renewer
+nix run github:Ch4s3r/willhaben-renewer
 ```
 
 You can omit the trailing attribute (`#...`) because the flake's default package is the wrapped binary (chromedriver on PATH). Pass flags after `--`.
