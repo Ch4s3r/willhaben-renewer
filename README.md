@@ -32,3 +32,6 @@ If SMS 2FA appears you'll be prompted for the 4‑digit code (reference printed 
 6. Open expired adverts page.
 7. For each "Neu veröffentlichen": Weiter → Weiter → Veröffentlichen.
 8. Loop until none left → quit & kill chromedriver.
+
+## TODO
+- Headless mode (enable with `--headless true`) is not fully tested; default is a visible browser. If issues appear when headless, retry without it and report.
