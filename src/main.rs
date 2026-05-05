@@ -2,7 +2,7 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use log::{info, warn};
 use thirtyfour::prelude::*;
-use thirtyfour::ChromeCapabilities;
+use thirtyfour::{ChromeCapabilities, DesiredCapabilities};
 use tokio::time::{sleep, Duration};
 use std::process::{Stdio, Child};
 use std::io::{self, Write};
@@ -82,7 +82,16 @@ fn start_chromedriver() -> Result<Child> {
 }
 
 fn build_caps(headless: bool) -> Result<ChromeCapabilities> {
-    let mut caps = ChromeCapabilities::new();
+    let mut caps = DesiredCapabilities::chrome();
+    let chrome_binary = which::which("google-chrome")
+        .or_else(|_| which::which("google-chrome-stable"))
+        .or_else(|_| which::which("chromium"))
+        .context("No Chrome/Chromium binary found in PATH")?;
+    caps.set_binary(
+        chrome_binary
+            .to_str()
+            .context("Chrome binary path is not valid UTF-8")?,
+    )?;
     if headless { caps.add_arg("--headless=new")?; }
     caps.add_arg("--no-sandbox")?;
     caps.add_arg("--disable-dev-shm-usage")?;

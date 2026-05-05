@@ -11,3 +11,4 @@ log = "0.4"
 thirtyfour = { version = "0.36" }
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "time"] }
 url = "2"
+which = "8.0.2"
